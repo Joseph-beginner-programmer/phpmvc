@@ -1,27 +1,32 @@
 <?php
 
-class Mahasiswa_model {
+class Mahasiswa_model
+{
 
     private $table = 'mahasiswa';
     private $db;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->db = new Database();
     }
 
-    
-    public function getAllMahasiswa() {
-        $this->db->query("Select * from " . $this->table );
+
+    public function getAllMahasiswa()
+    {
+        $this->db->query("Select * from " . $this->table);
         return $this->db->resultSet();
     }
-    
-    public function getMahasiswaById($id) {
+
+    public function getMahasiswaById($id)
+    {
         $this->db->query("Select * from " . $this->table . " where id = :id");
         $this->db->bind('id', $id);
         return $this->db->single();
     }
 
-    public function tambahDataMahasiswa($data) {
+    public function tambahDataMahasiswa($data)
+    {
         $query = "Insert into mahasiswa values ('', :nama, :nrp, :email, :jurusan)";
         $this->db->query($query);
         $this->db->bind('nama', $data['nama']);
@@ -34,5 +39,14 @@ class Mahasiswa_model {
         return $this->db->rowCount();
     }
 
-    
+    public function hapusDataMahasiswa($id)
+    {
+        $query = "Delete from mahasiswa where id = :id";
+        $this->db->query($query);
+        $this->db->bind('id', $id);
+
+        $this->db->execute();
+
+        return $this->db->rowCount();
+    }
 }
