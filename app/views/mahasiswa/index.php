@@ -6,12 +6,28 @@
     </div>
   </div>
 
-  <div class="row">
+  <div class="row mb-2">
     <div class="col-lg-6">
       <button id="addButton" type="button" class="btn btn-primary" data-toggle="modal" data-target="#formModal">
         Tambah Data Mahasiswa
       </button>
-      <br></br>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-6">
+      <form action="<?= BASEURL; ?>/mahasiswa/cari" method="post">
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Search..." name="keyword" id="keyword" aria-describedby="button-addon2" autocomplete="off">
+          <button class="btn btn-primary" type="submit" id="tombolCari">Find</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-6">
+
 
       <h3>Daftar Mahasiswa</h3>
 
@@ -20,8 +36,8 @@
           <li class="list-group-item ">
             <?= $mhs['nama'] ?>
             <a class="badge badge-danger float-right ml-1" href="<?= BASEURL; ?>/mahasiswa/hapus/<?= $mhs['id'] ?>" onclick="return confirm('yakin?')">hapus</a>
-            <a class="badge badge-warning float-right ml-1 tampilModalEdit" href="<?= BASEURL; ?>/mahasiswa/edit/<?= $mhs['id'] ?>" data-toggle="modal" data-target="#formModal" 
-            data-id="<?= $mhs['id']; ?>">edit</a>
+            <a class="badge badge-warning float-right ml-1 tampilModalEdit" href="<?= BASEURL; ?>/mahasiswa/edit/<?= $mhs['id'] ?>" data-toggle="modal" data-target="#formModal"
+              data-id="<?= $mhs['id']; ?>">edit</a>
             <a class="badge badge-primary float-right ml-1" href="<?= BASEURL; ?>/mahasiswa/detail/<?= $mhs['id'] ?>">detail</a>
           </li>
 
@@ -44,7 +60,8 @@
         <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">x</button>
       </div>
       <div class="modal-body">
-        <form action="<?= BASEURL ?>/mahasiswa/tambah" method="post">
+        <form id="formModal" action="<?= BASEURL ?>/mahasiswa/tambah" method="post">
+          <input type="hidden" name="id" id="id">
           <div class="mb-3">
             <label for="nama" class="form-label">Nama Mahasiswa</label>
             <input type="text" class="form-control" id="nama" name="nama">
